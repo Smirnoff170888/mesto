@@ -1,0 +1,10 @@
+.place-card__image-big {
+    border-radius: 0px;
+    width: 450px;
+    height: 561px;
+    background-size: cover;
+}
+
+.place-card__image-big::after {
+    background-color: transparent;
+}
