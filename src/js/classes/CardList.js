@@ -1,15 +1,12 @@
-'use strict'
-class CardList { // Имя файла принято называть по имени класса в camelCase
+import Card from './Card.js';
+
+export default class CardList {
     constructor(container, popup, api, cards) {
       this._container = container;
       this._popup = popup;
       this._api = api;
       this._cards = Array();
       if (cards) this.render(cards);
-      // лишнее усложнение
-      // проверку в методе проще делать и использовать там this._cards
-      // не передавая параметры
-      // this.render()
     }
   
     addCard(data) {
@@ -31,6 +28,5 @@ class CardList { // Имя файла принято называть по им�
   
     render(cards) {
       cards.forEach((card) => this.addCard(card, this._popup));
-      // this._cards
     }
 }

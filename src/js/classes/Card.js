@@ -1,5 +1,4 @@
-'use strict'
-class Card {
+export default class Card {
     constructor(container, {link, name, _id, likes}, liked, popup, showDelete) {
         this._link = link;
         this._name = name;
@@ -8,38 +7,9 @@ class Card {
         this._likesCount = likes.length;
         this._liked = liked;
         this._container = container;
-                /**
-                 * Передавать обработчик хорошая идея
-                 * Стоит записывать функцию в поля класса напрямую, вместо передачи
-                 * параметров для этого существуют сеттеры, которые делают классы чище
-                 * https://learn.javascript.ru/es-class#gettery-settery-i-vychislyaemye-svoystva
-                 * 
-                 * class Card { 
-                 *  constructor(container, {link, name}, popup) {
-                 *    this._onRemove = this.onRemove;
-                 *  }
-                 *  
-                 *  set onRemove (fn) {
-                 *    this._onRemove = fn
-                 *  }
-                 * }
-                 * 
-                 * addCard(data) {
-                 *  const card = new Card()
-                 * 
-                 *  card.onRemove = card => ...
-                 * 
-                 *  this.cards.push(card)
-                 * }
-                 * 
-                 * https://frontender.info/es6-classes-final/
-                 */
-
         this._cardElem = this.create();
         this._likeCounter = this._cardElem.querySelector('.place-card__like-counter');
         this._likeButton = this._cardElem.querySelector('.place-card__like-icon');
-        // this._cardElement = this.create()
-        // Поле класса лучше очевидным образом объявлять
         if (showDelete) {
             const delButton = this._cardElem.querySelector('.place-card__delete-icon');
             delButton.addEventListener('click', this.remove.bind(this));
@@ -75,16 +45,6 @@ class Card {
             <div class="place-card__like-counter"></div>
         </div>
         </div>`;
-        /**
-         * Можно улучшить
-         * 
-         * Каждый метод должен выполянять одно действие. 
-         * this._cardElem = this.create() происходит в конструкторе
-         * 
-         * внутри create достаточно 
-         * const card = document.createElement('div');
-         * использовать и возвращать
-         */
         const cardElem = document.createElement('div'); 
         cardElem.classList = 'place-card';
         cardElem.insertAdjacentHTML('beforeend', template);
@@ -92,16 +52,10 @@ class Card {
     }
 
     render() {
-        this._container.appendChild(this._cardElem); // Это логика отдельного метода render()
-        // внутри конструктора следующий логический порядок:
-        /**
-         * this._cardElem = this.create()
-         * добавление обработчиков
-         * this.render()
-         */
+        this._container.appendChild(this._cardElem);
     }
 
-    async like() { // ключи которые не используются лучше удалять
+    async like() {
         let f = true;
         if (!this._liked && this._onLike) f = await this._onLike(this);
         if (this._liked && this._onRemove) f = await this._onRemoveLike(this);
@@ -123,7 +77,7 @@ class Card {
 
     show(event) {
         if (event.target.classList.contains('place-card__image')) {
-        this._popup.open(() => // Отлично - используется callback функция
+        this._popup.open(() =>
             document.querySelector('.place-card__image-big').style.backgroundImage = `url(${this._link})`);
         }
     }

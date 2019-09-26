@@ -1,4 +1,8 @@
-'use strict'
+import Api from './classes/Api.js';
+import CardList from './classes/CardList.js';
+import Popup from './classes/Popup.js';
+
+const serverUrl = (NODE_ENV === 'development') ? 'http://praktikum.tk/cohort2' : 'https://praktikum.tk/cohort2';
 
 const form = document.forms.new;
 const formEdit = document.forms.edit;
@@ -102,7 +106,7 @@ function renderMe(data) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const api = new Api({
-    baseUrl: 'http://95.216.175.5/cohort2',
+    baseUrl: serverUrl,
     headers: {
       authorization: 'ec6220b5-ab34-43b0-99ca-028d2827c72a',
       'Content-Type': 'application/json'
@@ -175,18 +179,3 @@ document.addEventListener('DOMContentLoaded', async () => {
   const avatarPopup = new Popup(document.querySelector('.popup__avatar'));
   const cardList = new CardList(document.querySelector('.places-list'), imgPopup, api, await api.initialCards());
 });
-
-/**
- * 
- * Можно улучшить
- * 
- * Формы добавления карточки следует начинать валидировать при открытии
- * до начала ввода данных.
- */
-
- /**
-  * Отличная работа
-  * 
-  * Советую изучить статьи по организации коллбек функций из комментариев в классе
-  * cardList
-  */
