@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   userAvatar.addEventListener('click', () => {
     Validators.formAvatarValidator.reset();
-    avatarPopup.open(Validators.formAvatarValidator.validate());
+    avatarPopup.open(Validators.formAvatarValidator.validate);
   });
   btnOpenEdit.addEventListener('click', () => {
     Validators.formEditValidator.synchronize();
