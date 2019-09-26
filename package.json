@@ -6,7 +6,7 @@
     "test": "eslint src --ext .js",
     "build": "rimraf dist && NODE_ENV=production webpack --mode production",
     "dev": "NODE_ENV=development webpack-dev-server --mode development --open --watch",
-    "deploy": "gh-pages -d dist"
+    "deploy": "NODE_ENV=production gh-pages -d dist"
   },
   "repository": {
     "type": "git",
