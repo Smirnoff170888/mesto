@@ -24,7 +24,7 @@ export default class FormValidator {
     synchronize() {
         this._form.forEach((elem) => {
             if (this._options[elem.name] && this._options[elem.name].synchronize) {
-                let synchElem = document.querySelector(this._options[elem.name].synchronize);
+                const synchElem = document.querySelector(this._options[elem.name].synchronize);
                 elem.value = synchElem.textContent;
             }
         });
