@@ -1,5 +1,4 @@
-'use strict'
-class Popup {
+export default class Popup {
     constructor(container) {
         this._container = container;
         this._container.querySelector('.popup__close').addEventListener('click', this.close.bind(this));
